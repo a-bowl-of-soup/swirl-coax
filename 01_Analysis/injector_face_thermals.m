@@ -17,7 +17,7 @@ OF = 1.2;
 manifold_mdot = 0.560640169; % Massflow fuel, [kg/s] 
 
 % Injector definition  
-t_w = 0.25 * 0.0254;  % [m]
+t_w = 0.15 * 0.0254;  % [m]
 e = 200e-6; % [micrometers]
 dP_pct_fu = 0.2; % Fuel stiffness
 P_l = Pc * (1 + dP_pct_fu); % Fuel manifold pressure
@@ -28,7 +28,7 @@ k_w = 12; % Thermal Conductivity of Wall [W/m-K]
 % Reference diameters
 rho_fu = py.CoolProp.CoolProp.PropsSI('D','T', T_l,'P', P_l, fuel); % Fu density in manifold, [kg/m^3]
 P_dyn = P_l * 0.01;
-velo = 2; %sqrt(2 * P_dyn / rho_fu); % [m/s]
+velo = 1.3; %sqrt(2 * P_dyn / rho_fu); % [m/s]
 hydraulic_D = sqrt(manifold_mdot / (velo * rho_fu) / pi) * 2;
 
 % Iteration initialization

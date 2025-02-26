@@ -4,7 +4,7 @@ close all
 
 % Inlet environment definition
 Pc = 250 * 6894.76; % Chamber pressure, [Pa]
-m_dot = 0.560640169; % Massflow fuel, [kg/s]
+m_dot = 0.560640169 / 2; % Massflow fuel, [kg/s]
 T_l = 293.16; % K
 
 dP_pct_fu = 0.2; % Fuel stiffness
@@ -12,15 +12,18 @@ P_l = Pc * (1 + dP_pct_fu); % Fuel manifold pressure
 rho_l = py.CoolProp.CoolProp.PropsSI('D','T', T_l,'P', P_l, 'water');
 
 % Manifold Geometry Definition
-A_max = 0.00064516; % [m^2]
-A_min = A_max / 4;  
-manifold_half_length = 0.2; % [m]
+% A_max = 0.30653981 / 1550; % Ox [m^2]
+% A_min = 0.21618775 / 1550;  % Ox [m^2]
+A_max = 0.33381582 / 1550;  % Fu [m^2]
+A_min = 0.23641132 / 1550; % Fu [m^2]
+
+manifold_half_length = 1.65 * 0.0254 * pi; % [m]
 e = 200e-6; % [micrometers]
 
 % Manifold interpolation
 steps = 100;
 length = linspace(0, steps, steps);
-manifold_mdot = m_dot - 0.8 * (m_dot - m_dot/steps) ./ steps .* (length); % mdot left after entrance through windows
+manifold_mdot = m_dot - 0.9 * (m_dot - m_dot/steps) ./ steps .* (length); % mdot left after entrance through windows
 cubic_area = (length + steps/2) .* (length - steps).^2 ./ (steps^2 * steps/2) * (A_max - A_min) + A_min;
 
 % Velocity calculations
