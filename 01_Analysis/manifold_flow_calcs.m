@@ -9,7 +9,7 @@ T_l = 293.16; % K
 
 dP_pct_fu = 0.2; % Fuel stiffness
 P_l = Pc * (1 + dP_pct_fu); % Fuel manifold pressure
-rho_l = py.CoolProp.CoolProp.PropsSI('D','T', T_l,'P', P_l, 'water');
+rho_l = py.CoolProp.CoolProp.PropsSI('D','T', T_l,'P', P_l, 'ethanol');
 
 % Manifold Geometry Definition
 % A_max = 0.30653981 / 1550; % Ox [m^2]
@@ -31,7 +31,7 @@ velo = manifold_mdot ./ (cubic_area * rho_l);
 
 %% Pressure loss
 deltax = manifold_half_length / steps; 
-mu_lb = py.CoolProp.CoolProp.PropsSI('V','T', T_l, 'P', P_l, 'water'); % viscosity of bulk coolant [Pa-s]
+mu_lb = py.CoolProp.CoolProp.PropsSI('V','T', T_l, 'P', P_l, 'ethanol'); % viscosity of bulk coolant [Pa-s]
 hydraulic_D = sqrt(cubic_area / pi);
 
 Re_l = rho_l .* velo .* hydraulic_D ./ mu_lb;
